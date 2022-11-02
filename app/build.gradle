@@ -38,18 +38,17 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion Versions.compose
-        kotlinCompilerVersion Versions.kotlin
     }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    namespace 'com.lorenzofonseca.gitpub'
 }
 
 dependencies {
     implementation(project(":features:login"))
-    implementation(project(":features:home"))
     implementation(project(":features:repositories"))
     implementation(project(":libraries:resources"))
     implementation(project(":libraries:navigation"))
@@ -57,11 +56,13 @@ dependencies {
     implementation(Android.appcompat)
     implementation(Android.material)
     implementation(Compose.ui)
+    implementation(Android.coreKtx)
     implementation(Compose.material)
     implementation(Compose.preview)
     implementation(Android.lifecycle)
     implementation(Compose.composeActivity)
     implementation(Compose.navigation)
-
+    implementation(Koin.android)
+    implementation(Koin.compose)
     debugImplementation(Compose.tooling)
 }

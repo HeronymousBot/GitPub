@@ -4,6 +4,8 @@
     <bytecodeTargetLevel target="1.7">
       <module name="GitPub.app" target="11" />
       <module name="GitPub.buildSrc" target="11" />
+      <module name="GitPub.buildSrc.main" target="11" />
+      <module name="GitPub.buildSrc.test" target="11" />
       <module name="GitPub.features.home" target="11" />
       <module name="GitPub.features.login" target="11" />
       <module name="GitPub.features.repositories" target="11" />
