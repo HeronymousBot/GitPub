@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="Theme.GitPub.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.GitPub.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.GitPub.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

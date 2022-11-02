@@ -1,0 +1,15 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+rootProject.name = "GitPub"
+include ':app'
+include ':features:repositories'
+include ':libraries:resources'
+include ':libraries:navigation'
+include ':features:login'
+include ':features:home'

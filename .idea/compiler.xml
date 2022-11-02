@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.7">
+      <module name="GitPub.app" target="11" />
+      <module name="GitPub.buildSrc" target="11" />
+      <module name="GitPub.features.home" target="11" />
+      <module name="GitPub.features.login" target="11" />
+      <module name="GitPub.features.repositories" target="11" />
+      <module name="GitPub.libraries.navigation" target="11" />
+      <module name="GitPub.libraries.resources" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
