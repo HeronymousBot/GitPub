@@ -29,7 +29,7 @@ class HomeActivity : ComponentActivity() {
             GitPubTheme {
                 Scaffold {
                     Surface(color = MaterialTheme.colors.background) {
-                        navigationComponent(navHostController = rememberNavController())
+                        navigationComponent()
                     }
                 }
             }
@@ -41,24 +41,23 @@ class HomeActivity : ComponentActivity() {
 }
 
 @Composable
-fun navigationComponent(navHostController: NavHostController){
-    NavHost(navController = navHostController, startDestination = ComposeNavigation.home){
-        composable(ComposeNavigation.home){ HomeScreen(navHostController = navHostController)}
-        composable(ComposeNavigation.login){ Login()}
-        composable(ComposeNavigation.repositories){RepositoriesList()}
+fun navigationComponent(navHostController: NavHostController = rememberNavController()) {
+    NavHost(navController = navHostController, startDestination = ComposeNavigation.home) {
+        composable(ComposeNavigation.home) { HomeScreen(navHostController = navHostController) }
+        composable(ComposeNavigation.login) { Login() }
+        composable(ComposeNavigation.repositories) { RepositoriesList() }
     }
 }
 
 @Composable
-fun HomeScreen( navHostController: NavHostController) {
+fun HomeScreen(navHostController: NavHostController) {
     when (val state = koinViewModel<HomeViewModel>().homeUiState.collectAsState().value) {
         is HomeUiState.LoggedIn -> Column {
             ShowUserDashBoard(userId = state.userId)
         }
-        is HomeUiState.LoggedOut ->{Column {
-            navHostController.navigate(ComposeNavigation.login)
-
-        }}
+        is HomeUiState.LoggedOut -> {
+            ShowLoginActivity(navController = navHostController)
+        }
 
     }
 }

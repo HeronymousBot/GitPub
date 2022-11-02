@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import com.lorenzofonseca.login.LoginActivity
 import com.lorenzofonseca.navigation.ActivityNavigation.startLoginActivity
+import com.lorenzofonseca.navigation.ComposeNavigation
 
 @Composable
 fun ShowUserDashBoard(userId: String) {
@@ -23,5 +24,6 @@ fun ShowUserDashBoard(userId: String) {
 @Composable
 fun ShowLoginActivity(navController : NavHostController) {
     Text(text = "show login")
+    navController.navigate(ComposeNavigation.login)
 
 }
