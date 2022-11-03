@@ -1,17 +1,12 @@
 package com.lorenzofonseca.gitpub
 
-import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Button
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavHostController
-import com.lorenzofonseca.login.LoginActivity
-import com.lorenzofonseca.navigation.ActivityNavigation.startLoginActivity
 import com.lorenzofonseca.navigation.ComposeNavigation
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ShowUserDashBoard(userId: String) {
@@ -22,8 +17,19 @@ fun ShowUserDashBoard(userId: String) {
 }
 
 @Composable
-fun ShowLoginActivity(navController : NavHostController) {
+fun ShowLoginPage(navController: NavHostController) {
     Text(text = "show login")
-    navController.navigate(ComposeNavigation.login)
+    navController.navigate(ComposeNavigation.Login.route)
 
+}
+
+@Composable
+fun HomeScreen(navHostController: NavHostController) {
+    when (val state = koinViewModel<HomeViewModel>().homeUiState.collectAsState().value) {
+        is HomeUiState.LoggedIn -> Column {
+            ShowUserDashBoard(userId = state.userId)
+        }
+        is HomeUiState.LoggedOut -> ShowLoginPage(navController = navHostController)
+
+    }
 }

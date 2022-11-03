@@ -1,8 +1,9 @@
 package com.lorenzofonseca.navigation
 
-object ComposeNavigation {
-    const val login = "navigateToLogin"
-    const val repositories = "navigateToRepositories"
-    const val userProfile = "navigateToUserProfile"
-    const val home = "navigateToHome"
+sealed class ComposeNavigation(val route: String) {
+    object Login : ComposeNavigation("login")
+    object Repositories : ComposeNavigation("repositoriesList")
+    object Home : ComposeNavigation("home")
+    object UserProfile : ComposeNavigation("userProfile")
+
 }

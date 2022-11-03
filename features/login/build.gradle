@@ -46,7 +46,7 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":libraries:navigation"))
     implementation(project(":libraries:resources"))
     implementation(Android.coreKtx)
     implementation(Android.appcompat)
