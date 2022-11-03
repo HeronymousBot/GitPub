@@ -1,5 +1,6 @@
 package com.lorenzofonseca.networking
 
+import com.lorenzofonseca.networking.service.AuthenticationService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -7,8 +8,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class Networking {
-    private val okHttpClient by lazy {
+object Networking {
+    val okHttpClient by lazy {
         OkHttpClient.Builder()
             .addNetworkInterceptor { chain ->
                 chain.proceed(
@@ -16,7 +17,7 @@ class Networking {
                         .newBuilder()
                         .header(
                             "User-Agent",
-                            "StarStableOnline/" + "1.999999.1" + " " + "Android"
+                            ""
                         )
                         .build()
                 )
@@ -27,6 +28,16 @@ class Networking {
             .build()
     }
 
+    private val githubRetrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(moshi())
+            .client(okHttpClient)
+            .build()
+    }
+
+    internal val githubService = {githubRetrofit.create(AuthenticationService::class.java)}
+
     // Moshi Set Up
     private fun moshi() =
         MoshiConverterFactory.create(
@@ -35,15 +46,6 @@ class Networking {
                 .build()
         )
 
-
-    // Config Services
-
-    private val configRetrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl("https://launcher-config.starstable.com/")
-            .addConverterFactory(moshi())
-            .client(okHttpClient)
-            .build()
-    }
+    private val baseUrl = ""
 
 }
