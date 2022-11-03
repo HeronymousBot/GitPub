@@ -1,6 +1,9 @@
 package com.lorenzofonseca.networking
 
+import com.lorenzofonseca.networking.repositoryImpl.AuthenticationRepositoryImpl
+import com.lorenzofonseca.networking.repositoryImpl.RepositoriesRepositoryImpl
 import com.lorenzofonseca.networking.service.AuthenticationService
+import com.lorenzofonseca.networking.service.RepositoriesService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -9,6 +12,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object Networking {
+    private val baseUrl = ""
+
     val okHttpClient by lazy {
         OkHttpClient.Builder()
             .addNetworkInterceptor { chain ->
@@ -36,7 +41,11 @@ object Networking {
             .build()
     }
 
-    internal val githubService = {githubRetrofit.create(AuthenticationService::class.java)}
+    internal val authenticationService by lazy { githubRetrofit.create(AuthenticationService::class.java) }
+    internal val repositoriesService by lazy { githubRetrofit.create(RepositoriesService::class.java) }
+
+    internal val authenticationRepository by lazy { AuthenticationRepositoryImpl(authenticationService) }
+    internal val repositoriesRepository by lazy { RepositoriesRepositoryImpl(repositoriesService) }
 
     // Moshi Set Up
     private fun moshi() =
@@ -45,7 +54,5 @@ object Networking {
                 .addLast(KotlinJsonAdapterFactory())
                 .build()
         )
-
-    private val baseUrl = ""
 
 }

@@ -2,7 +2,7 @@ package com.lorenzofonseca.domain.repository
 
 import com.lorenzofonseca.domain.model.RepositoriesModel
 
-interface IRepositoriesRepository {
+interface RepositoriesRepository {
 
     suspend fun getRepositoriesList() : RepositoriesModel
 }

@@ -3,6 +3,7 @@ package com.lorenzofonseca.gitpub
 import android.app.Application
 import coil.ImageLoader
 import coil.ImageLoaderFactory
+import com.lorenzofonseca.gitpub.di.serviceModules
 import com.lorenzofonseca.gitpub.di.viewModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -15,7 +16,7 @@ class GitPubApplication : Application(), ImageLoaderFactory {
         startKoin {
             androidLogger()
             androidContext(this@GitPubApplication)
-            modules(viewModules)
+            modules(viewModules, serviceModules)
         }
     }
 
