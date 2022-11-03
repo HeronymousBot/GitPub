@@ -1,12 +1,13 @@
 package com.lorenzofonseca.networking
 
-import com.lorenzofonseca.networking.response.AuthResponse
+import com.lorenzofonseca.networking.response.toModel
 import com.lorenzofonseca.networking.service.AuthenticationService
 
-class AuthenticationRepository() : AuthenticationService {
+class AuthenticationRepository(val service : AuthenticationService) :
+    com.lorenzofonseca.domain.repository.IAuthenticationRepository {
 
-    override suspend fun auth(clientId: String, clientSecret: String): AuthResponse {
-        val result = Networking.githubService().auth(clientId, clientSecret)
-        return result
+    override suspend fun auth(clientId: String, clientSecret: String): com.lorenzofonseca.domain.AuthModel {
+        val result = service.auth(clientId, clientSecret)
+        return result.toModel()
     }
 }

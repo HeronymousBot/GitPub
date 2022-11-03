@@ -53,6 +53,8 @@ dependencies {
     implementation(project(":features:repositories"))
     implementation(project(":libraries:resources"))
     implementation(project(":libraries:navigation"))
+    implementation(project(":libraries:networking"))
+    implementation(project(":libraries:domain"))
     implementation(Android.coreKtx)
     implementation(Android.appcompat)
     implementation(Android.material)
