@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         applicationId "com.lorenzofonseca.gitpub"
-        minSdk 26
-        targetSdk 32
+        minSdk ConfigData.minSdkVersion
+        targetSdk ConfigData.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -49,6 +49,7 @@ android {
 
 dependencies {
     implementation(project(":features:login"))
+    implementation(project(":features:home"))
     implementation(project(":features:repositories"))
     implementation(project(":libraries:resources"))
     implementation(project(":libraries:navigation"))
@@ -59,10 +60,12 @@ dependencies {
     implementation(Android.coreKtx)
     implementation(Compose.material)
     implementation(Compose.preview)
+    implementation(Compose.accompanistNavigation)
     implementation(Android.lifecycle)
     implementation(Compose.composeActivity)
     implementation(Compose.navigation)
     implementation(Koin.android)
     implementation(Koin.compose)
+    implementation(Coil.coil)
     debugImplementation(Compose.tooling)
 }

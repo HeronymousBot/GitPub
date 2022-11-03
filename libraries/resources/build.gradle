@@ -7,8 +7,8 @@ android {
     compileSdk 32
 
     defaultConfig {
-        minSdk 26
-        targetSdk 32
+        minSdk ConfigData.minSdkVersion
+        targetSdk ConfigData.targetSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -19,6 +19,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Versions.compose
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -37,7 +43,8 @@ dependencies {
     implementation(Compose.ui)
     implementation(Compose.material)
     implementation(Compose.preview)
-    implementation(Android.lifecycle)
+    implementation(Coil.coil)
+    implementation(Coil.compose)
     implementation(Compose.composeActivity)
     debugImplementation(Compose.tooling)
 }

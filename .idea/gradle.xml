@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/features/repositories" />
             <option value="$PROJECT_DIR$/libraries" />
             <option value="$PROJECT_DIR$/libraries/navigation" />
+            <option value="$PROJECT_DIR$/libraries/networking" />
             <option value="$PROJECT_DIR$/libraries/resources" />
           </set>
         </option>
