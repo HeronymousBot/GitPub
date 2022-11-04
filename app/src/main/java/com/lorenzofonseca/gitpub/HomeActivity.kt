@@ -1,54 +1,56 @@
-@file:OptIn(ExperimentalAnimationApi::class)
-
 package com.lorenzofonseca.gitpub
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
-import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.compose.rememberNavController
+import com.lorenzofonseca.gitpub.navigation.navigationComponent
 import com.lorenzofonseca.gitpub.ui.Theme.GitPubTheme
 import com.lorenzofonseca.home.HomeScreen
-import com.lorenzofonseca.login.Login
-import com.lorenzofonseca.navigation.ComposeNavigation
-import com.lorenzofonseca.repositories.ui.RepositoriesList
+import com.lorenzofonseca.home.HomeUiState
+import com.lorenzofonseca.home.HomeViewModel
+import com.lorenzofonseca.navigation.ActivityNavigation
+import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeActivity : ComponentActivity() {
 
+    val viewModel: HomeViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            GitPubTheme {
-                Scaffold {
-                    Surface(color = MaterialTheme.colors.background) {
-                        navigationComponent()
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.homeUiState.collect { state ->
+                    when (state) {
+                        is HomeUiState.LoggedOut -> startLogin(ActivityNavigation.startLogin())
+                        is HomeUiState.LoggedIn ->
+                            setContent {
+                            GitPubTheme {
+                                HomeScreen(navHostController = rememberNavController())
+
+                            }
+
+                        }
                     }
+
                 }
             }
-
         }
     }
 
-
-}
-
-
-@Composable
-fun navigationComponent(navHostController: NavHostController = rememberAnimatedNavController()) {
-    AnimatedNavHost(
-        navController = navHostController,
-        startDestination = ComposeNavigation.Home.route
-    ) {
-        composable(ComposeNavigation.Home.route) { HomeScreen(navHostController = navHostController) }
-        composable(ComposeNavigation.Login.route) { Login(navController = navHostController) }
-        composable(ComposeNavigation.Repositories.route) { RepositoriesList() }
+    fun startLogin(intent: Intent) {
+        startActivity(intent)
     }
 }

@@ -14,10 +14,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.lorenzofonseca.login.ui.Theme.GitPubTheme
-import com.lorenzofonseca.navigation.ComposeNavigation
 import com.lorenzofonseca.resources.components.ActionButton
 import com.lorenzofonseca.resources.components.ImageHolder
 import com.lorenzofonseca.resources.theme.Color
@@ -25,7 +22,7 @@ import com.lorenzofonseca.resources.theme.Type
 
 
 @Composable
-fun Login(navController: NavHostController) {
+fun Login() {
     Scaffold {
         Surface {
                 Column(
@@ -48,7 +45,7 @@ fun Login(navController: NavHostController) {
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                     )
 
-                    ActionButton(onClickAction = { navController.navigate(ComposeNavigation.Repositories.route) })
+                    ActionButton(onClickAction = {  })
                 }
 
         }
@@ -60,6 +57,6 @@ fun Login(navController: NavHostController) {
 @Composable
 fun LoginPagePreview() {
     GitPubTheme {
-        Login(navController = rememberNavController())
+        Login()
     }
 }
