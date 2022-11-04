@@ -4,22 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.rememberNavController
-import com.lorenzofonseca.gitpub.navigation.navigationComponent
 import com.lorenzofonseca.gitpub.ui.Theme.GitPubTheme
 import com.lorenzofonseca.home.HomeScreen
 import com.lorenzofonseca.home.HomeUiState
 import com.lorenzofonseca.home.HomeViewModel
 import com.lorenzofonseca.navigation.ActivityNavigation
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

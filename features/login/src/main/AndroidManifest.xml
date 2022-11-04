@@ -2,15 +2,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lorenzofonseca.login">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application>
         <activity
             android:name=".LoginActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_login"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:scheme="gitpub"
+                    android:host="login" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="action.login.open" />
                 <category android:name="android.intent.category.DEFAULT" />

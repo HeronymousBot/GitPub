@@ -1,16 +1,20 @@
 package com.lorenzofonseca.resources.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun ImageHolder(resourceId: Int) {
+fun ImageHolder(resourceId: Int, imageSize: Dp, padding : Dp) {
 
     val painter = rememberAsyncImagePainter(resourceId)
     val state = painter.state
@@ -18,20 +22,21 @@ fun ImageHolder(resourceId: Int) {
         painter = painter,
         contentDescription = null,
         modifier = Modifier
-            .size(90.dp)
+            .size(imageSize)
+            .padding(padding)
             .clip(CircleShape)
     )
 }
 
 @Composable
-fun ImageHolder(urlPath: String) {
+fun ImageHolder(urlPath: String, imageSize: DpSize) {
     val painter = rememberAsyncImagePainter(urlPath)
     val state = painter.state
     Image(
         painter = painter,
         contentDescription = null,
         modifier = Modifier
-            .size(128.dp)
+            .size(imageSize)
             .clip(CircleShape)
     )
 }

@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":libraries:navigation"))
     implementation(project(":libraries:resources"))
     implementation(project(":libraries:networking"))
+    implementation(project(":libraries:domain"))
     implementation(Android.coreKtx)
     implementation(Android.appcompat)
     implementation(Android.material)
@@ -58,4 +59,6 @@ dependencies {
     implementation(Android.lifecycle)
     implementation(Compose.composeActivity)
     implementation(Compose.navigation)
+    implementation(Koin.compose)
+    implementation(Koin.android)
 }

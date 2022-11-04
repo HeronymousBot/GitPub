@@ -1,6 +1,8 @@
 package com.lorenzofonseca.login
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Scaffold
@@ -8,6 +10,8 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.lorenzofonseca.login.ui.Theme.GitPubTheme
+import com.lorenzofonseca.navigation.IntentNavigation
+import com.lorenzofonseca.networking.AuthenticationUrl
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,19 +20,33 @@ class LoginActivity : ComponentActivity() {
             GitPubTheme {
                 Scaffold {
                     Surface {
-                        Login()
+                        Login {
+                            IntentNavigation.openWebIntent(
+                                this,
+                                AuthenticationUrl.generateAuthUrl()
+                            )
+                        }
+
                     }
                 }
 
             }
         }
     }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val uri = intent?.data
+
+        val code = uri?.getQueryParameter("code")
+        val state = uri?.getQueryParameter("state")
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun LoginPreview() {
     GitPubTheme {
-        Login()
+        Login({})
     }
 }

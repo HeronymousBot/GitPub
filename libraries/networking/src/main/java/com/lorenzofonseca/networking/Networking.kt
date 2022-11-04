@@ -1,9 +1,9 @@
 package com.lorenzofonseca.networking
 
 import com.lorenzofonseca.networking.repositoryImpl.AuthenticationRepositoryImpl
-import com.lorenzofonseca.networking.repositoryImpl.RepositoriesRepositoryImpl
+import com.lorenzofonseca.networking.repositoryImpl.GithubApiRepositoryImpl
 import com.lorenzofonseca.networking.service.AuthenticationService
-import com.lorenzofonseca.networking.service.RepositoriesService
+import com.lorenzofonseca.networking.service.GithubApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -12,7 +12,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object Networking {
-    private val baseUrl = ""
 
     val okHttpClient by lazy {
         OkHttpClient.Builder()
@@ -33,19 +32,27 @@ object Networking {
             .build()
     }
 
-    private val githubRetrofit by lazy {
+    private val githubAuthRetrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(AuthenticationUrl.authBaseUrl)
             .addConverterFactory(moshi())
             .client(okHttpClient)
             .build()
     }
 
-    internal val authenticationService by lazy { githubRetrofit.create(AuthenticationService::class.java) }
-    internal val repositoriesService by lazy { githubRetrofit.create(RepositoriesService::class.java) }
+    private val githubApiRetrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(AuthenticationUrl.authBaseUrl)
+            .addConverterFactory(moshi())
+            .client(okHttpClient)
+            .build()
+    }
+
+    internal val authenticationService by lazy { githubAuthRetrofit.create(AuthenticationService::class.java) }
+    internal val repositoriesService by lazy { githubApiRetrofit.create(GithubApiService::class.java) }
 
     internal val authenticationRepository by lazy { AuthenticationRepositoryImpl(authenticationService) }
-    internal val repositoriesRepository by lazy { RepositoriesRepositoryImpl(repositoriesService) }
+    internal val githubApiRepository by lazy { GithubApiRepositoryImpl(repositoriesService) }
 
     // Moshi Set Up
     private fun moshi() =

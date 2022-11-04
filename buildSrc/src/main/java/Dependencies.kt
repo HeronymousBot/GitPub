@@ -47,6 +47,10 @@ object Koin{
     const val android = "io.insert-koin:koin-android:3.2.2"
 }
 
+object Datastore {
+    const val preferences =  "androidx.datastore:datastore-preferences:1.0.0"
+}
+
 object JUnit {
     const val test = "junit:junit:4.+"
     const val androidTest = "androidx.test.ext:junit:1.1.3"
