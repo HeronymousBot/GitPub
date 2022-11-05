@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":libraries:resources"))
     implementation(project(":libraries:networking"))
     implementation(project(":libraries:domain"))
+    implementation(project(":libraries:datastorage"))
     implementation(Android.coreKtx)
     implementation(Android.appcompat)
     implementation(Android.material)

@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/features/repositories" />
             <option value="$PROJECT_DIR$/features/user" />
             <option value="$PROJECT_DIR$/libraries" />
+            <option value="$PROJECT_DIR$/libraries/datastorage" />
             <option value="$PROJECT_DIR$/libraries/domain" />
             <option value="$PROJECT_DIR$/libraries/navigation" />
             <option value="$PROJECT_DIR$/libraries/networking" />

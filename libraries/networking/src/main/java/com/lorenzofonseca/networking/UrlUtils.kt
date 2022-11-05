@@ -13,3 +13,7 @@ object AuthenticationUrl{
         return "$authBaseUrl/authorize?client_id=$clientId&scope=$scope&state=$state"
     }
 }
+
+object GithubApiUrl{
+    const val baseUrl = "https://api.github.com"
+}

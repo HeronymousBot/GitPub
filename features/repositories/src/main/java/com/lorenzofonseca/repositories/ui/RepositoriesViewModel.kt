@@ -1,8 +1,9 @@
 package com.lorenzofonseca.repositories.ui
 
 import androidx.lifecycle.ViewModel
+import com.lorenzofonseca.domain.repository.GithubApiRepository
 
-class RepositoriesViewModel : ViewModel() {
+class RepositoriesViewModel(repository : GithubApiRepository) : ViewModel() {
 }
 
 sealed class RepositoriesUiState{

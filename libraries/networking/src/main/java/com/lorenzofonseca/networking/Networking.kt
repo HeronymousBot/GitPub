@@ -13,7 +13,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object Networking {
 
-    val okHttpClient by lazy {
+    private val okHttpClient by lazy {
         OkHttpClient.Builder()
             .addNetworkInterceptor { chain ->
                 chain.proceed(
@@ -42,17 +42,17 @@ object Networking {
 
     private val githubApiRetrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(AuthenticationUrl.authBaseUrl)
+            .baseUrl(GithubApiUrl.baseUrl)
             .addConverterFactory(moshi())
             .client(okHttpClient)
             .build()
     }
 
     internal val authenticationService by lazy { githubAuthRetrofit.create(AuthenticationService::class.java) }
-    internal val repositoriesService by lazy { githubApiRetrofit.create(GithubApiService::class.java) }
+    internal val githubApiService by lazy { githubApiRetrofit.create(GithubApiService::class.java) }
 
     internal val authenticationRepository by lazy { AuthenticationRepositoryImpl(authenticationService) }
-    internal val githubApiRepository by lazy { GithubApiRepositoryImpl(repositoriesService) }
+    internal val githubApiRepository by lazy { GithubApiRepositoryImpl(githubApiService) }
 
     // Moshi Set Up
     private fun moshi() =
