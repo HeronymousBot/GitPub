@@ -16,10 +16,12 @@ import com.lorenzofonseca.resources.components.ButtonWithRightIcon
 import com.lorenzofonseca.resources.components.ImageHolder
 import com.lorenzofonseca.resources.theme.Color
 import com.lorenzofonseca.resources.theme.Type
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun Login(startAuthentication: () -> Unit) {
+fun Login(startAuthentication: Unit) {
+    val viewModel : LoginViewModel = koinViewModel()
     Scaffold {
         Surface {
             Column(
@@ -45,7 +47,10 @@ fun Login(startAuthentication: () -> Unit) {
                 ButtonWithRightIcon(
                     text = R.string.signin_with_github,
                     rightIconId = R.drawable.github_icon,
-                    onClickAction = startAuthentication
+                    onClickAction = {
+                        viewModel.updateUiState(LoginUiState.IsLoading)
+                        startAuthentication
+                    }
                 )
             }
 
@@ -58,6 +63,6 @@ fun Login(startAuthentication: () -> Unit) {
 @Composable
 fun LoginPagePreview() {
     GitPubTheme {
-        Login({})
+
     }
 }

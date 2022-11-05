@@ -48,8 +48,8 @@ object Networking {
             .build()
     }
 
-    internal val authenticationService by lazy { githubAuthRetrofit.create(AuthenticationService::class.java) }
-    internal val githubApiService by lazy { githubApiRetrofit.create(GithubApiService::class.java) }
+    val authenticationService by lazy { githubAuthRetrofit.create(AuthenticationService::class.java) }
+    val githubApiService by lazy { githubApiRetrofit.create(GithubApiService::class.java) }
 
     internal val authenticationRepository by lazy { AuthenticationRepositoryImpl(authenticationService) }
     internal val githubApiRepository by lazy { GithubApiRepositoryImpl(githubApiService) }

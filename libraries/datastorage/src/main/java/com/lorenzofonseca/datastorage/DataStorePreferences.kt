@@ -8,6 +8,8 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.lorenzofonseca.domain.model.AuthModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 object UserDataStorePreferences {
     private val Context.userPreferencesDataStore: DataStore<Preferences> by preferencesDataStore(
@@ -43,7 +45,7 @@ object AuthInformationDataStorePreferences {
 }
 
 object TokenDataStorePreferences {
-    val Context.tokenPreferencesDataStore: DataStore<Preferences> by preferencesDataStore(
+    private val Context.tokenPreferencesDataStore: DataStore<Preferences> by preferencesDataStore(
         name = "token"
     )
 
@@ -62,5 +64,17 @@ object TokenDataStorePreferences {
             preferences[TIME_UNTIL_REFRESH_TOKEN_EXPIRATION] = authData.refresh_token_expires_in
 
         }
+
+        fun Context.getTokenData(): Flow<AuthModel> =
+            tokenPreferencesDataStore.data.map { preferences ->
+                AuthModel(
+                    access_token = preferences[ACCESS_TOKEN] ?: "",
+                    expires_in = preferences[TIME_UNTIL_ACCESS_TOKEN_EXPIRATION] ?: 0,
+                    refresh_token = preferences[REFRESH_TOKEN] ?: "",
+                    refresh_token_expires_in = preferences[TIME_UNTIL_REFRESH_TOKEN_EXPIRATION] ?: 0
+                )
+            }
+
+
     }
 }

@@ -9,29 +9,30 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
+import com.lorenzofonseca.datastorage.AuthInformationDataStorePreferences.storeAuthInformation
 import com.lorenzofonseca.login.ui.Theme.GitPubTheme
 import com.lorenzofonseca.navigation.IntentNavigation
 import com.lorenzofonseca.networking.AuthenticationUrl
 import kotlinx.coroutines.launch
-import com.lorenzofonseca.datastorage.AuthInformationDataStorePreferences.storeAuthInformation
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : ComponentActivity() {
+    val viewModel: LoginViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             GitPubTheme {
                 Scaffold {
                     Surface {
-                        Login {
+                        Login(
                             IntentNavigation.openWebIntent(
                                 this,
                                 AuthenticationUrl.generateAuthUrl()
                             )
-                        }
+                        )
 
                     }
                 }
-
             }
         }
     }
@@ -43,6 +44,8 @@ class LoginActivity : ComponentActivity() {
         val code = uri?.getQueryParameter("code") ?: ""
         val state = uri?.getQueryParameter("state") ?: ""
 
+        viewModel.updateUiState(LoginUiState.InProgress(code, state))
+
         lifecycleScope.launch {
             storeAuthInformation(code = code, state = state)
         }
@@ -53,6 +56,6 @@ class LoginActivity : ComponentActivity() {
 @Composable
 fun LoginPreview() {
     GitPubTheme {
-        Login({})
+
     }
 }
