@@ -24,17 +24,22 @@ class LoginActivity : ComponentActivity() {
             GitPubTheme {
                 Scaffold {
                     Surface {
-                        Login(
-                            IntentNavigation.openWebIntent(
-                                this,
-                                AuthenticationUrl.generateAuthUrl()
-                            )
-                        )
+                        Login {
+                            startAuthentication()
+                        }
 
                     }
                 }
             }
         }
+    }
+
+    fun startAuthentication() {
+        viewModel.updateUiState(LoginUiState.IsLoading)
+        IntentNavigation.openWebIntent(
+            this,
+            AuthenticationUrl.generateAuthUrl()
+        )
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -48,6 +53,7 @@ class LoginActivity : ComponentActivity() {
 
         lifecycleScope.launch {
             storeAuthInformation(code = code, state = state)
+            viewModel.getAccessToken(code = code, state = state)
         }
     }
 }

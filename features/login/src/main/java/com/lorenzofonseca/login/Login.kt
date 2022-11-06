@@ -7,12 +7,15 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lorenzofonseca.login.ui.Theme.GitPubTheme
 import com.lorenzofonseca.resources.components.ButtonWithRightIcon
+import com.lorenzofonseca.resources.components.FullScreenProgressIndicator
 import com.lorenzofonseca.resources.components.ImageHolder
 import com.lorenzofonseca.resources.theme.Color
 import com.lorenzofonseca.resources.theme.Type
@@ -20,8 +23,9 @@ import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun Login(startAuthentication: Unit) {
-    val viewModel : LoginViewModel = koinViewModel()
+fun Login(startAuthentication: () -> Unit) {
+    val viewModel: LoginViewModel = koinViewModel()
+    val uiState = viewModel.loginUiState.collectAsState().value
     Scaffold {
         Surface {
             Column(
@@ -47,12 +51,24 @@ fun Login(startAuthentication: Unit) {
                 ButtonWithRightIcon(
                     text = R.string.signin_with_github,
                     rightIconId = R.drawable.github_icon,
-                    onClickAction = {
-                        viewModel.updateUiState(LoginUiState.IsLoading)
-                        startAuthentication
-                    }
+                    onClickAction = startAuthentication
+
                 )
             }
+
+            FullScreenProgressIndicator(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .alpha(
+                        when (uiState) {
+                            is LoginUiState.Error -> 0f
+                            is LoginUiState.InProgress -> 0.7f
+                            LoginUiState.IsLoading -> 0.7f
+                            is LoginUiState.SignedIn -> 0f
+                            LoginUiState.SignedOut -> 0f
+                        }
+                    )
+            )
 
         }
     }

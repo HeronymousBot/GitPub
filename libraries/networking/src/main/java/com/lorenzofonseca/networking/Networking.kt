@@ -20,8 +20,8 @@ object Networking {
                     chain.request()
                         .newBuilder()
                         .header(
-                            "User-Agent",
-                            ""
+                            "Accept",
+                            "application/json"
                         )
                         .build()
                 )

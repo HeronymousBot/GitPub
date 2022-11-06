@@ -7,10 +7,10 @@ object AuthenticationUrl{
     val clientId = "Iv1.b9547fe756d6a088"
     val scope = "read:user,public_repo,gist"
     val state = UUID.randomUUID().toString()
-    val authBaseUrl = "https://github.com/login/oauth/"
+    val authBaseUrl = "https://github.com/"
 
     fun generateAuthUrl() : String{
-        return "${authBaseUrl}authorize?client_id=$clientId&scope=$scope&state=$state"
+        return "${authBaseUrl}login/oauth/authorize?client_id=$clientId&scope=$scope&state=$state"
     }
 }
 
