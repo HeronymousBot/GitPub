@@ -28,6 +28,9 @@ GitPub utilizes a few dependencies that are dear to Android Developers. To avoid
 ## Data:
 
 [OkHttp](https://square.github.io/okhttp/) - Practical HTTP client that allow us fetching data with efficiency.
+
 [Retrofit](https://square.github.io/retrofit/) - A safety-wrapper for HTTP calls.
+
 [Moshi](https://github.com/square/moshi) - Library used to parse JSON efficiently.
+
 [DataStore](https://developer.android.com/topic/libraries/architecture/datastore) - Android library that provides the possibility to store data in key-value pairs in a consistent assynchronous way.
