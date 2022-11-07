@@ -33,10 +33,16 @@ GitPub utilizes a few dependencies that are dear to Android Developers. To avoid
 
 [Moshi](https://github.com/square/moshi) - Library used to parse JSON efficiently.
 
-[DataStore](https://developer.android.com/topic/libraries/architecture/datastore) - Android library that provides the possibility to store data in key-value pairs in a consistent assynchronous way.
+[DataStore](https://developer.android.com/topic/libraries/architecture/datastore?gclid=CjwKCAiA9qKbBhAzEiwAS4yeDbZ5PodKraD4RLDE8EoFKscwo-WyyrRW3RB09cingsykCaKc1FHAoRoCGFUQAvD_BwE&gclsrc=aw.ds) - Android solution to store data locally in an assynchronous manner.
+
+## Others:
+
+[Koin](https://insert-koin.io/) - The chosen dependency injection framework to avoid work based on tools instead of events.
+
+[MockK](https://mockk.io/) - Library to mock calls and objects with the purpose of making testing easier.
 
 # Future improvements
--Not satisfied with the navigation, which is currently using a mix of activity navigation and compose native items for navigation. Would like to migrate it fully to ComposeNavigation.
+- Not satisfied with the navigation, which is currently using a mix of activity navigation and compose native items for navigation. Would like to migrate it fully to ComposeNavigation.
 - Currently, there is no friendly error message being delivered to the user when a request goes wrong.
 - In the login screen, if we do not receive the code and state on the intent(suddenly leaving authentication), the UiState.IsLoading keeps going on forever.
 - There is currently no way to refresh the repositoriesList or the user information.
