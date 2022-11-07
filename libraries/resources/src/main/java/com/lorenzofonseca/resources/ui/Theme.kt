@@ -1,13 +1,13 @@
-package com.lorenzofonseca.gitpub.ui
+package com.lorenzofonseca.resources.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import com.lorenzofonseca.resources.theme.Color
-import com.lorenzofonseca.resources.theme.Shape
-import com.lorenzofonseca.resources.theme.Type
+import com.lorenzofonseca.resources.ui.Color
+import com.lorenzofonseca.resources.ui.Shape
+import com.lorenzofonseca.resources.ui.Type
 
 object Theme {
     private val DarkColorPalette = darkColors(

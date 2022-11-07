@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk ConfigData.compileSdkVersion
 
     defaultConfig {
         minSdk ConfigData.minSdkVersion
@@ -46,9 +46,14 @@ android {
 }
 
 dependencies {
+    implementation(project(":features:repositories"))
+    implementation(project(":features:user"))
     implementation(project(":libraries:navigation"))
     implementation(project(":libraries:resources"))
-    implementation(Koin.compose)
+    implementation(project(":libraries:networking"))
+    implementation(project(":libraries:domain"))
+    implementation(project(":libraries:datastorage"))
+    implementation(Compose.accompanistNavigation)
     implementation(Android.coreKtx)
     implementation(Android.appcompat)
     implementation(Android.material)

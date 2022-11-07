@@ -1,4 +1,4 @@
-package com.lorenzofonseca.resources.theme
+package com.lorenzofonseca.resources.ui
 
 import androidx.compose.ui.graphics.Color
 

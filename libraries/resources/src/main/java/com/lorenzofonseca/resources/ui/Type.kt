@@ -1,6 +1,5 @@
-package com.lorenzofonseca.resources.theme
+package com.lorenzofonseca.resources.ui
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font

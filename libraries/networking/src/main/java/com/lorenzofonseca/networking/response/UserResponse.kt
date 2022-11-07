@@ -6,16 +6,16 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class UserResponse(
     val login: String,
-    val id: String,
+    val id: Int,
     val avatar_url: String,
     val name: String,
     val location: String,
-    val email: String,
-    val bio: String,
+    val email: String? = "",
+    val bio: String? = "",
     val followers: Int,
     val following: Int,
     val created_at: String,
-    val owned_private_repos: Int
+    val total_private_repos: Int? = 0
 )
 
 fun UserResponse.toModel() = UserModel(
@@ -29,5 +29,5 @@ fun UserResponse.toModel() = UserModel(
     followers,
     following,
     created_at,
-    owned_private_repos
+    total_private_repos
 )

@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.lorenzofonseca.domain.model.AuthModel
+import com.lorenzofonseca.domain.model.AuthRequestModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -36,12 +37,21 @@ object AuthInformationDataStorePreferences {
     private val CODE = stringPreferencesKey("user_auth_code")
     private val STATE = stringPreferencesKey("user_auth_state")
 
-    suspend fun Context.storeAuthInformation(code: String, state: String) {
+    suspend fun Context.storeAuthRequestInformation(code: String, state: String) {
         authInformationPreferencesDataStore.edit { preferences ->
             preferences[CODE] = code
             preferences[STATE] = state
         }
     }
+
+    fun Context.getAuthRequestInformation() =
+        authInformationPreferencesDataStore.data.map { preferences ->
+            AuthRequestModel(
+                code = preferences[CODE] ?: "",
+                state = preferences[STATE] ?: "",
+            )
+        }
+
 }
 
 object TokenDataStorePreferences {
@@ -64,17 +74,15 @@ object TokenDataStorePreferences {
             preferences[TIME_UNTIL_REFRESH_TOKEN_EXPIRATION] = authData.refresh_token_expires_in
 
         }
-
-        fun Context.getTokenData(): Flow<AuthModel> =
-            tokenPreferencesDataStore.data.map { preferences ->
-                AuthModel(
-                    access_token = preferences[ACCESS_TOKEN] ?: "",
-                    expires_in = preferences[TIME_UNTIL_ACCESS_TOKEN_EXPIRATION] ?: 0,
-                    refresh_token = preferences[REFRESH_TOKEN] ?: "",
-                    refresh_token_expires_in = preferences[TIME_UNTIL_REFRESH_TOKEN_EXPIRATION] ?: 0
-                )
-            }
-
-
     }
+
+    fun Context.getTokenData(): Flow<AuthModel> =
+        tokenPreferencesDataStore.data.map { preferences ->
+            AuthModel(
+                access_token = preferences[ACCESS_TOKEN] ?: "",
+                expires_in = preferences[TIME_UNTIL_ACCESS_TOKEN_EXPIRATION] ?: 0,
+                refresh_token = preferences[REFRESH_TOKEN] ?: "",
+                refresh_token_expires_in = preferences[TIME_UNTIL_REFRESH_TOKEN_EXPIRATION] ?: 0
+            )
+        }
 }

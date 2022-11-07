@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace 'com.lorenzofonseca.user'
-    compileSdk 32
+    compileSdk ConfigData.compileSdkVersion
 
     defaultConfig {
-        minSdk 26
-        targetSdk 32
+        minSdk ConfigData.minSdkVersion
+        targetSdk ConfigData.targetSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -21,6 +21,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Versions.compose
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

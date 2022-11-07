@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">GitPub</string>
     <string name="log_in">Log in</string>
+    <string name="repos">Repos</string>
+    <string name="no_description">Nothing to say about this one!</string>
+    <string name="no_bio">No bio was written yet!</string>
     <string name="signin_with_github">Sign in with GitHub</string>
+    <string name="login_caption">\"Come on, I\'ll pour you some well deserved repos!\"</string>
 </resources>

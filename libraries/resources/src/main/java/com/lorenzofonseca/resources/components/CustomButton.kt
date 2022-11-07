@@ -1,7 +1,9 @@
 package com.lorenzofonseca.resources.components
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
@@ -12,8 +14,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lorenzofonseca.resources.R
-import com.lorenzofonseca.resources.theme.Color
-import com.lorenzofonseca.resources.theme.Type
+import com.lorenzofonseca.resources.ui.Color
+import com.lorenzofonseca.resources.ui.Type
 
 @Composable
 fun ButtonWithRightIcon(text: Int, rightIconId: Int, onClickAction: () -> Unit) {
@@ -30,8 +32,9 @@ fun ButtonWithRightIcon(text: Int, rightIconId: Int, onClickAction: () -> Unit) 
                         )
             ).button
         )
+        Spacer(modifier = Modifier.width(8.dp))
 
-        ImageHolder(resourceId = rightIconId, imageSize = 16.dp, padding = 8.dp)
+        ImageHolder(resourceId = rightIconId, imageSize = 16.dp)
     }
 }
 
@@ -41,6 +44,6 @@ fun CustomActionButton() {
     ButtonWithRightIcon(
         onClickAction = {},
         text = R.string.signin_with_github,
-        rightIconId = R.drawable.github_icon
+        rightIconId = R.drawable.github_classic_icon
     )
 }

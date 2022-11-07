@@ -9,10 +9,13 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.lorenzofonseca.datastorage.AuthInformationDataStorePreferences.storeAuthInformation
-import com.lorenzofonseca.login.ui.Theme.GitPubTheme
+import com.lorenzofonseca.datastorage.AuthInformationDataStorePreferences.storeAuthRequestInformation
+import com.lorenzofonseca.datastorage.TokenDataStorePreferences.storeTokenData
+import com.lorenzofonseca.domain.model.AuthModel
+import com.lorenzofonseca.navigation.ActivityNavigation
 import com.lorenzofonseca.navigation.IntentNavigation
 import com.lorenzofonseca.networking.AuthenticationUrl
+import com.lorenzofonseca.resources.ui.Theme.GitPubTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,14 +35,30 @@ class LoginActivity : ComponentActivity() {
                 }
             }
         }
+        lifecycleScope.launch{
+            viewModel.loginUiState.collect{
+                when(it){
+                    is LoginUiState.SignedIn -> goToHomePage(it.authModel)
+                    else -> {}
+                }
+            }
+        }
     }
 
-    fun startAuthentication() {
+    private fun startAuthentication() {
         viewModel.updateUiState(LoginUiState.IsLoading)
         IntentNavigation.openWebIntent(
             this,
             AuthenticationUrl.generateAuthUrl()
         )
+    }
+
+    fun goToHomePage(authModel: AuthModel) {
+        lifecycleScope.launch {
+            storeTokenData(authModel)
+        }
+        finish()
+        startActivity(ActivityNavigation.startHome())
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -49,11 +68,13 @@ class LoginActivity : ComponentActivity() {
         val code = uri?.getQueryParameter("code") ?: ""
         val state = uri?.getQueryParameter("state") ?: ""
 
-        viewModel.updateUiState(LoginUiState.InProgress(code, state))
+        if (code.isNotBlank() && state.isNotBlank()) {
+            viewModel.updateUiState(LoginUiState.InProgress(code, state))
 
-        lifecycleScope.launch {
-            storeAuthInformation(code = code, state = state)
-            viewModel.getAccessToken(code = code, state = state)
+            lifecycleScope.launch {
+                storeAuthRequestInformation(code = code, state = state)
+                viewModel.getAccessToken(code = code, state = state)
+            }
         }
     }
 }

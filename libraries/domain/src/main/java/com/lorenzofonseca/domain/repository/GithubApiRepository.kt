@@ -5,6 +5,6 @@ import com.lorenzofonseca.domain.model.UserModel
 
 interface GithubApiRepository {
 
-    suspend fun getRepositoriesList(username : String, acessToken : String) : List<RepositoryModel>
-    suspend fun getUser(accessToken : String) : UserModel
+    suspend fun getRepositoriesList(username: String, accessToken: String): List<RepositoryModel>
+    suspend fun getUser(accessToken: String): UserModel
 }

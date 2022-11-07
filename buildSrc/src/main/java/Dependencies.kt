@@ -4,6 +4,7 @@ object Android {
     const val appcompat = "androidx.appcompat:appcompat:1.4.0"
     const val material = "com.google.android.material:material:1.4.0"
     const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+    const val testCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9"
 
 
 }
@@ -34,7 +35,8 @@ object Compose {
     const val tooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
     const val composeActivity = "androidx.activity:activity-compose:1.3.1"
     const val navigation = "androidx.navigation:navigation-compose:2.4.2"
-    const val accompanistNavigation = "com.google.accompanist:accompanist-navigation-animation:0.27.0"
+    const val accompanistNavigation =
+        "com.google.accompanist:accompanist-navigation-animation:0.27.0"
 }
 
 object Coil {
@@ -42,17 +44,29 @@ object Coil {
     const val compose = "io.coil-kt:coil-compose:2.2.2"
 }
 
-object Koin{
-    const val compose= "io.insert-koin:koin-androidx-compose:3.2.2"
-    const val android = "io.insert-koin:koin-android:3.2.2"
+object Koin {
+    const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
+    const val android = "io.insert-koin:koin-android:${Versions.koin}"
+
+    // Koin testing tools
+    const val testingTools = "io.insert-koin:koin-test:${Versions.koin}"
+
+    // Needed JUnit version
+    const val junit = "io.insert-koin:koin-test-junit4:${Versions.koin}"
 }
 
 object Datastore {
-    const val preferences =  "androidx.datastore:datastore-preferences:1.0.0"
+    const val preferences = "androidx.datastore:datastore-preferences:1.0.0"
 }
 
 object JUnit {
     const val test = "junit:junit:4.+"
     const val androidTest = "androidx.test.ext:junit:1.1.3"
     const val espressoCore = "androidx.test.espresso:espresso-core:3.4.0"
+}
+
+object MockK {
+    const val mockk = "io.mockk:mockk:${Versions.mockk}"
+    const val androidTesting = "io.mockk:mockk-android:${Versions.mockk}"
+    const val testingAgent = "io.mockk:mockk-agent:${Versions.mockk}"
 }

@@ -7,10 +7,10 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface GithubApiService {
-    @GET("/user")
-    fun getUser(@Header("Authorization") accessToken: String): UserResponse
+    @GET("user")
+    suspend fun getUser(@Header("Authorization") accessToken: String): UserResponse
 
-    @GET("/users/{username}/repos")
+    @GET("users/{username}/repos")
     suspend fun getRepositoriesForUser(
         @Path("username") username: String,
         @Header("Authorization") accessToken: String

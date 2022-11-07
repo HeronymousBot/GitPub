@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun ImageHolder(resourceId: Int, imageSize: Dp, padding : Dp) {
+fun ImageHolder(resourceId: Int, imageSize: Dp, padding : Dp = 0.dp) {
 
     val painter = rememberAsyncImagePainter(resourceId)
     val state = painter.state
@@ -29,7 +29,7 @@ fun ImageHolder(resourceId: Int, imageSize: Dp, padding : Dp) {
 }
 
 @Composable
-fun ImageHolder(urlPath: String, imageSize: DpSize) {
+fun ImageHolder(urlPath: String, imageSize: Dp) {
     val painter = rememberAsyncImagePainter(urlPath)
     val state = painter.state
     Image(

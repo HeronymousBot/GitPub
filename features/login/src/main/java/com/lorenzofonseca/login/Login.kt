@@ -1,24 +1,25 @@
 package com.lorenzofonseca.login
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.lorenzofonseca.login.ui.Theme.GitPubTheme
 import com.lorenzofonseca.resources.components.ButtonWithRightIcon
 import com.lorenzofonseca.resources.components.FullScreenProgressIndicator
 import com.lorenzofonseca.resources.components.ImageHolder
-import com.lorenzofonseca.resources.theme.Color
-import com.lorenzofonseca.resources.theme.Type
+import com.lorenzofonseca.resources.ui.Color
+import com.lorenzofonseca.resources.ui.Theme.GitPubTheme
+import com.lorenzofonseca.resources.ui.Type
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -26,6 +27,11 @@ import org.koin.androidx.compose.koinViewModel
 fun Login(startAuthentication: () -> Unit) {
     val viewModel: LoginViewModel = koinViewModel()
     val uiState = viewModel.loginUiState.collectAsState().value
+    val isLoading = when (uiState) {
+        is LoginUiState.InProgress, LoginUiState.IsLoading -> true
+        else -> false
+    }
+
     Scaffold {
         Surface {
             Column(
@@ -33,24 +39,35 @@ fun Login(startAuthentication: () -> Unit) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                ImageHolder(resourceId = R.drawable.gitpub_logo, 90.dp, 16.dp)
+                Text(
+                    text = stringResource(id = R.string.app_name), style = Type.Typography(
+                        Color.contrastColor(
+                            isSystemInDarkTheme()
+                        )
+                    ).h2
+                )
+                ImageHolder(
+                    resourceId = R.drawable.gitpub_logo,
+                    imageSize = 160.dp,
+                    padding = 16.dp
+                )
+
                 Spacer(modifier = Modifier.height(20.dp))
-                TextField(value = "", onValueChange = {}, label = {
-                    Text(
-                        text = "User", style = Type.Typography(
-                            Color.contrastColor(
-                                isSystemInDarkTheme()
-                            )
-                        ).body1
-                    )
-                })
+
+                Text(
+                    text = stringResource(id = R.string.login_caption), style = Type.Typography(
+                        Color.contrastColor(
+                            isSystemInDarkTheme()
+                        )
+                    ).caption
+                )
 
                 Spacer(modifier = Modifier.height(60.dp))
 
 
                 ButtonWithRightIcon(
                     text = R.string.signin_with_github,
-                    rightIconId = R.drawable.github_icon,
+                    rightIconId = R.drawable.github_classic_icon,
                     onClickAction = startAuthentication
 
                 )
@@ -58,18 +75,12 @@ fun Login(startAuthentication: () -> Unit) {
 
             FullScreenProgressIndicator(
                 modifier = Modifier
+                    .background(Color.primaryColor.copy(alpha = if (isLoading) 0.7f else 0f))
                     .fillMaxSize()
                     .alpha(
-                        when (uiState) {
-                            is LoginUiState.Error -> 0f
-                            is LoginUiState.InProgress -> 0.7f
-                            LoginUiState.IsLoading -> 0.7f
-                            is LoginUiState.SignedIn -> 0f
-                            LoginUiState.SignedOut -> 0f
-                        }
+                        if (isLoading) 1f else 0f
                     )
             )
-
         }
     }
 
@@ -79,6 +90,6 @@ fun Login(startAuthentication: () -> Unit) {
 @Composable
 fun LoginPagePreview() {
     GitPubTheme {
-
+        Login {}
     }
 }

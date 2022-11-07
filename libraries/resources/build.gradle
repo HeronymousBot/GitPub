@@ -37,7 +37,7 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":libraries:navigation"))
     implementation(Android.appcompat)
     implementation(Android.material)
     implementation(Compose.ui)
@@ -46,5 +46,6 @@ dependencies {
     implementation(Coil.coil)
     implementation(Coil.compose)
     implementation(Compose.composeActivity)
+    implementation(Compose.navigation)
     debugImplementation(Compose.tooling)
 }

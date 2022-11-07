@@ -7,8 +7,8 @@ import com.squareup.moshi.JsonClass
 data class RepositoryResponse(
     val name: String,
     val id: Int,
-    val description: String,
-    val forkCounts: Int,
+    val description: String? = "",
+    val forkCounts: Int? = 0,
     val size: Int,
     val created_at: String,
     val updated_at: String,

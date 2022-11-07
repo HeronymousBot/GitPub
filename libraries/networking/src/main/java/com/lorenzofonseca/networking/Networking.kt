@@ -21,7 +21,7 @@ object Networking {
                         .newBuilder()
                         .header(
                             "Accept",
-                            "application/json"
+                            "application/vnd.github+json"
                         )
                         .build()
                 )
