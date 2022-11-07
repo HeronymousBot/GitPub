@@ -27,6 +27,12 @@ object UserDataStorePreferences {
             preferences[USER_BIRTH_DAY] = birthday
         }
     }
+
+    suspend fun Context.clearUserPreferences() {
+        userPreferencesDataStore.edit {
+            it.clear()
+        }
+    }
 }
 
 object AuthInformationDataStorePreferences {
@@ -51,6 +57,12 @@ object AuthInformationDataStorePreferences {
                 state = preferences[STATE] ?: "",
             )
         }
+
+    suspend fun Context.clearAuthRequestPreferences() {
+        authInformationPreferencesDataStore.edit {
+            it.clear()
+        }
+    }
 
 }
 
@@ -85,4 +97,10 @@ object TokenDataStorePreferences {
                 refresh_token_expires_in = preferences[TIME_UNTIL_REFRESH_TOKEN_EXPIRATION] ?: 0
             )
         }
+
+    suspend fun Context.clearTokenPreferences() {
+        tokenPreferencesDataStore.edit {
+            it.clear()
+        }
+    }
 }
