@@ -42,6 +42,7 @@ GitPub utilizes a few dependencies that are dear to Android Developers. To avoid
 [MockK](https://mockk.io/) - Library to mock calls and objects with the purpose of making testing easier.
 
 # Future improvements
+- Testing capabilities can be improved regarding ComposeTestRule and also MainDispatcherRule for Coroutine operations.
 - We receive the duration for the access_token, but at the moment we do not validate that information before making requests.
 - Some improvements could be made if repository data sources returned Flows, it could be used on StateHolders to combine data.
 - Not satisfied with the navigation, which is currently using a mix of activity navigation and compose native items for navigation. Would like to migrate it fully to ComposeNavigation.
