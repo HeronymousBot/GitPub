@@ -42,6 +42,8 @@ GitPub utilizes a few dependencies that are dear to Android Developers. To avoid
 [MockK](https://mockk.io/) - Library to mock calls and objects with the purpose of making testing easier.
 
 # Future improvements
+- We receive the duration for the access_token, but at the moment we do not validate that information before making requests.
+- Some improvements could be made if repository data sources returned Flows, it could be used on StateHolders to combine data.
 - Not satisfied with the navigation, which is currently using a mix of activity navigation and compose native items for navigation. Would like to migrate it fully to ComposeNavigation.
 - Currently, there is no friendly error message being delivered to the user when a request goes wrong.
 - In the login screen, if we do not receive the code and state on the intent(suddenly leaving authentication), the UiState.IsLoading keeps going on forever.
