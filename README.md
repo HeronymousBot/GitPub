@@ -6,6 +6,11 @@
  This app aims to provide a simple way to connect an android app with your github account, showing you all your repositories and some profile information on the logged account.
  
  # Architecture
+ For the separation of concerns, the recommendation of UI, Domain and Data layers was followed, so we could follow principles of clean architecture.
+ 
+ ![image](https://user-images.githubusercontent.com/23667489/201109016-061f755b-31f2-4827-8ff1-9ce9335f7192.png)
+
+
  The app utilizes a modern MVVM approach as an architecture pattern, basing itself on a multi-module approach that divides modules into features and libraries, basing on the overall operability and connection with other modules. Here is how the structure currently looks:
  
  
